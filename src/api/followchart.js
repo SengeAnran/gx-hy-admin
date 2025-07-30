@@ -107,7 +107,7 @@ export function getStatus(params) {
   });
 }
 
-//  查看方案
+//  查看流程图
 export function getPlanById(id) {
   return service({
     url: path + `/flow/show/${id}`,

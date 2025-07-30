@@ -68,451 +68,17 @@ import insertCss from 'insert-css';
 import { Graph, Shape, FunctionExt, DataUri } from '@antv/x6'
 import {startDragToGraph} from './Graph/methods.js'
 import RightDrawer from "./components/RightDrawer.vue";
-
-const data = {
-  "cells": [
-    {
-      "shape": "edge",
-      "attrs": {
-        "line": {
-          "stroke": "#1890ff",
-          "strokeWidth": 1,
-          "targetMarker": {
-            "name": "classic",
-            "size": 8
-          },
-          "strokeDasharray": 0,
-          "style": {
-            "animation": "ant-line 30s infinite linear"
-          }
-        }
-      },
-      "id": "60e641fa-790b-445f-adec-208857279481",
-      "connector": "normal",
-      "router": {
-        "name": ""
-      },
-      "zIndex": 0,
-      "labels": [
-        {
-          "text": ""
-        }
-      ],
-      "source": {
-        "cell": "cbedd9dd-de17-42d2-bfb0-0fb9aae09d25",
-        "port": "port2"
-      },
-      "target": {
-        "cell": "cbedd9dd-de17-42d2-bfb0-0fb9aae09d25",
-        "port": "port1"
-      }
-    },
-    {
-      "shape": "edge",
-      "attrs": {
-        "line": {
-          "stroke": "#1890ff",
-          "strokeWidth": 1,
-          "targetMarker": {
-            "name": "classic",
-            "size": 8
-          },
-          "strokeDasharray": 0,
-          "style": {
-            "animation": "ant-line 30s infinite linear"
-          }
-        }
-      },
-      "id": "693ae677-90d3-49fa-8032-871ee556a17a",
-      "connector": "normal",
-      "router": {
-        "name": ""
-      },
-      "zIndex": 0,
-      "labels": [
-        {
-          "text": ""
-        }
-      ],
-      "source": {
-        "cell": "cbedd9dd-de17-42d2-bfb0-0fb9aae09d25",
-        "port": "port2"
-      },
-      "target": {
-        "cell": "3c50dfb4-8f0b-437b-8fc8-1f8fcee52313",
-        "port": "port1"
-      }
-    },
-    {
-      "shape": "edge",
-      "attrs": {
-        "line": {
-          "stroke": "#1890ff",
-          "strokeWidth": 1,
-          "targetMarker": {
-            "name": "classic",
-            "size": 8
-          },
-          "strokeDasharray": 0,
-          "style": {
-            "animation": "ant-line 30s infinite linear"
-          }
-        }
-      },
-      "id": "3710f6db-ec76-456f-90e5-db5da7e9313d",
-      "connector": "smooth",
-      "router": {
-        "name": ""
-      },
-      "zIndex": 0,
-      "labels": [
-        {
-          "text": ""
-        }
-      ],
-      "source": {
-        "cell": "aa8500f9-2f2a-4a68-8e49-ae58256cfb29",
-        "port": "port2"
-      },
-      "target": {
-        "cell": "cbedd9dd-de17-42d2-bfb0-0fb9aae09d25",
-        "port": "port3"
-      }
-    },
-    {
-      "shape": "edge",
-      "attrs": {
-        "line": {
-          "stroke": "#1890ff",
-          "strokeWidth": 1,
-          "targetMarker": {
-            "name": "classic",
-            "size": 8
-          },
-          "strokeDasharray": 0,
-          "style": {
-            "animation": "ant-line 30s infinite linear"
-          }
-        }
-      },
-      "id": "0f1a680c-5a97-4ab8-ada1-fa79cf367b5a",
-      "connector": "normal",
-      "router": {
-        "name": "manhattan"
-      },
-      "zIndex": 0,
-      "labels": [
-        {
-          "text": ""
-        }
-      ],
-      "source": {
-        "cell": "aa8500f9-2f2a-4a68-8e49-ae58256cfb29",
-        "port": "port4"
-      },
-      "target": {
-        "cell": "cbedd9dd-de17-42d2-bfb0-0fb9aae09d25",
-        "port": "port4"
-      }
-    },
-    {
-      "position": {
-        "x": 540,
-        "y": 360
-      },
-      "size": {
-        "width": 100,
-        "height": 60
-      },
-      "attrs": {
-        "body": {
-          "stroke": "#000000",
-          "strokeWidth": 1,
-          "fill": "#ffffff"
-        },
-        "label": {
-          "text": "正方形节点",
-          "fill": "#000000",
-          "fontSize": 14
-        }
-      },
-      "visible": true,
-      "shape": "rect",
-      "id": "cbedd9dd-de17-42d2-bfb0-0fb9aae09d25",
-      "zIndex": 1,
-      "ports": {
-        "groups": {
-          "top": {
-            "position": "top",
-            "attrs": {
-              "circle": {
-                "r": 4,
-                "magnet": true,
-                "stroke": "#2D8CF0",
-                "strokeWidth": 2,
-                "fill": "#fff"
-              }
-            }
-          },
-          "bottom": {
-            "position": "bottom",
-            "attrs": {
-              "circle": {
-                "r": 4,
-                "magnet": true,
-                "stroke": "#2D8CF0",
-                "strokeWidth": 2,
-                "fill": "#fff"
-              }
-            }
-          },
-          "left": {
-            "position": "left",
-            "attrs": {
-              "circle": {
-                "r": 4,
-                "magnet": true,
-                "stroke": "#2D8CF0",
-                "strokeWidth": 2,
-                "fill": "#fff"
-              }
-            }
-          },
-          "right": {
-            "position": "right",
-            "attrs": {
-              "circle": {
-                "r": 4,
-                "magnet": true,
-                "stroke": "#2D8CF0",
-                "strokeWidth": 2,
-                "fill": "#fff"
-              }
-            }
-          }
-        },
-        "items": [
-          {
-            "id": "port1",
-            "group": "top"
-          },
-          {
-            "id": "port2",
-            "group": "bottom"
-          },
-          {
-            "id": "port3",
-            "group": "left"
-          },
-          {
-            "id": "port4",
-            "group": "right"
-          }
-        ]
-      }
-    },
-    {
-      "position": {
-        "x": 540,
-        "y": 536
-      },
-      "size": {
-        "width": 100,
-        "height": 100
-      },
-      "attrs": {
-        "body": {
-          "stroke": "#000000",
-          "strokeWidth": 1,
-          "fill": "#ffffff"
-        },
-        "label": {
-          "text": "圆形节点",
-          "fill": "#000000",
-          "fontSize": 14
-        }
-      },
-      "visible": true,
-      "shape": "ellipse",
-      "id": "3c50dfb4-8f0b-437b-8fc8-1f8fcee52313",
-      "zIndex": 2,
-      "ports": {
-        "groups": {
-          "top": {
-            "position": "top",
-            "attrs": {
-              "circle": {
-                "r": 4,
-                "magnet": true,
-                "stroke": "#2D8CF0",
-                "strokeWidth": 2,
-                "fill": "#fff"
-              }
-            }
-          },
-          "bottom": {
-            "position": "bottom",
-            "attrs": {
-              "circle": {
-                "r": 4,
-                "magnet": true,
-                "stroke": "#2D8CF0",
-                "strokeWidth": 2,
-                "fill": "#fff"
-              }
-            }
-          },
-          "left": {
-            "position": "left",
-            "attrs": {
-              "circle": {
-                "r": 4,
-                "magnet": true,
-                "stroke": "#2D8CF0",
-                "strokeWidth": 2,
-                "fill": "#fff"
-              }
-            }
-          },
-          "right": {
-            "position": "right",
-            "attrs": {
-              "circle": {
-                "r": 4,
-                "magnet": true,
-                "stroke": "#2D8CF0",
-                "strokeWidth": 2,
-                "fill": "#fff"
-              }
-            }
-          }
-        },
-        "items": [
-          {
-            "id": "port1",
-            "group": "top"
-          },
-          {
-            "id": "port2",
-            "group": "bottom"
-          },
-          {
-            "id": "port3",
-            "group": "left"
-          },
-          {
-            "id": "port4",
-            "group": "right"
-          }
-        ]
-      }
-    },
-    {
-      "position": {
-        "x": 530,
-        "y": 58
-      },
-      "size": {
-        "width": 120,
-        "height": 120
-      },
-      "attrs": {
-        "label": {
-          "text": "条件节点",
-          "fill": "#000000",
-          "fontSize": 14,
-          "textWrap": {
-            "width": -50,
-            "height": "70%",
-            "ellipsis": true
-          }
-        },
-        "body": {
-          "fill": "#ffffff",
-          "stroke": "#000000",
-          "refPoints": "0,10 10,0 20,10 10,20",
-          "strokeWidth": 1
-        }
-      },
-      "visible": true,
-      "shape": "polygon",
-      "id": "aa8500f9-2f2a-4a68-8e49-ae58256cfb29",
-      "ports": {
-        "groups": {
-          "top": {
-            "position": "top",
-            "attrs": {
-              "circle": {
-                "r": 4,
-                "magnet": true,
-                "stroke": "#2D8CF0",
-                "strokeWidth": 2,
-                "fill": "#fff"
-              }
-            }
-          },
-          "bottom": {
-            "position": "bottom",
-            "attrs": {
-              "circle": {
-                "r": 4,
-                "magnet": true,
-                "stroke": "#2D8CF0",
-                "strokeWidth": 2,
-                "fill": "#fff"
-              }
-            }
-          },
-          "left": {
-            "position": "left",
-            "attrs": {
-              "circle": {
-                "r": 4,
-                "magnet": true,
-                "stroke": "#2D8CF0",
-                "strokeWidth": 2,
-                "fill": "#fff"
-              }
-            }
-          },
-          "right": {
-            "position": "right",
-            "attrs": {
-              "circle": {
-                "r": 4,
-                "magnet": true,
-                "stroke": "#2D8CF0",
-                "strokeWidth": 2,
-                "fill": "#fff"
-              }
-            }
-          }
-        },
-        "items": [
-          {
-            "id": "port1",
-            "group": "top"
-          },
-          {
-            "id": "port2",
-            "group": "bottom"
-          },
-          {
-            "id": "port3",
-            "group": "left"
-          },
-          {
-            "id": "port4",
-            "group": "right"
-          }
-        ]
-      },
-      "zIndex": 3
-    }
-  ]
-};
+import _ from "lodash";
 export default {
   components: {RightDrawer},
+  props: {
+    jsonData: {
+      type: Object,
+      default: () => { return {
+        cells: [],
+      }},
+    },
+  },
   data() {
     return {
       graph:'',
@@ -547,6 +113,18 @@ export default {
     setTimeout(()=>{
       this.showTips = false
     },5000)
+  },
+  watch: {
+    jsonData: {
+      handler:function (val)   {
+        if (val.cells && val.cells.length >  0) {
+          this.$nextTick(() => {
+            this.graph.fromJSON(_.cloneDeep(val))
+          })
+        }
+      },
+      deep: true,
+    }
   },
   methods: {
     initX6(){
@@ -622,7 +200,8 @@ export default {
               }
             }
           `);
-      this.graph.fromJSON(data)
+      this.graph.fromJSON(_.cloneDeep(this.jsonData))
+      // this.graph.fromJSON(data)
       this.$nextTick(() => {
         // this.graph.centerContent()  // 内容居中
         if ( this.graph.history) {
@@ -724,7 +303,6 @@ export default {
       this.$nextTick(()=>{
         const getJson = this.graph.toJSON();
         // const getJson = this.graph.toJSON();
-        console.log('getJson',getJson);
         let data = JSON.stringify(getJson)
         let uri = 'data:text/csv;charset=utf-8,\ufeff' + encodeURIComponent(data)
         let link = document.createElement("a")
