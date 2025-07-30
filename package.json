@@ -43,6 +43,7 @@
     "js-beautify": "1.13.0",
     "js-cookie": "3.0.1",
     "jsencrypt": "3.0.0-rc.1",
+    "lodash": "^4.17.21",
     "marked": "^15.0.12",
     "mermaid": "^8.14.0",
     "moment": "^2.30.1",
