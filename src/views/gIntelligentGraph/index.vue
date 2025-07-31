@@ -2,7 +2,7 @@
   <div style="width: 100%; height: 92vh">
     <iframe
       id="neo4j_iframe"
-      src="http://127.0.0.1:5005/"
+      :src="iframeURL"
       width="100%"
       height="100%"
     >
@@ -13,6 +13,7 @@
 export default {
   data() {
     return {
+      iframeURL: "http://127.0.0.1:5005/"
       // fullscreenLoading: false,
       //
     };
