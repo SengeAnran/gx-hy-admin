@@ -63,7 +63,7 @@ export default {
         this.flowchart = {
           cells,
         };
-
+        console.log(this.flowchart);
       })
     },
     /**
@@ -101,23 +101,27 @@ export default {
           }
         }
       })
-      const edgeArr = edges.map(i => {
-        const edge = {
-          ...i,
-        }
-        edge.attrs.line = {
-          ...edge.attrs.line,
-          "targetMarker": {
-            "name": "classic",
-            "size": 8
-          },
-          "strokeDasharray": 0,
-          "style": {
-            "animation": "ant-line 30s infinite linear"
+      let edgeArr = [];
+      if (edges && edges.length > 0) {
+        edgeArr = edges.map(i => {
+          const edge = {
+            ...i,
           }
-        }
-        return edge
-      })
+          edge.attrs.line = {
+            ...edge.attrs.line,
+            "targetMarker": {
+              "name": "classic",
+              "size": 8
+            },
+            "strokeDasharray": 0,
+            "style": {
+              "animation": "ant-line 30s infinite linear"
+            }
+          }
+          return edge
+        })
+      }
+
       return [...nodeArr, ...edgeArr];
     },
     // 保存
