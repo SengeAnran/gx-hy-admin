@@ -2,63 +2,6 @@
 <template>
 <div class="container_warp">
   <div id="containerChart"></div>
-<!-- 右側配置栏 -->
-<!--  <RightDrawer class="right_drawer" :drawerType="type" :selectCell="selectCell" :graph="graph" :grid="grid" @deleteNode="deleteNode"></RightDrawer>-->
-
-<!--  &lt;!&ndash;  头部工具栏&ndash;&gt;-->
-<!--  <div class="operating">-->
-<!--    <div class="btn-group">-->
-<!--      <el-tooltip class="item" effect="dark" content="直线箭头" placement="bottom">-->
-<!--        <div class="btn" title="圆形节点" @mousedown="startDrag('Circle',$event)">-->
-<!--          <i class="iconfont icon-circle"></i>-->
-<!--        </div>-->
-<!--      </el-tooltip>-->
-<!--      <el-tooltip class="item" effect="dark" content="直线箭头" placement="bottom">-->
-<!--        <div class="btn" title="正方形节点" @mousedown="startDrag('Rect',$event)">-->
-<!--          <i class="iconfont icon-square"></i>-->
-<!--        </div>-->
-<!--      </el-tooltip>-->
-<!--      <el-tooltip class="item" effect="dark" content="直线箭头" placement="bottom">-->
-<!--        <div class="btn" title="条件节点">-->
-<!--          <i class="iconfont icon-square rotate-square" @mousedown="startDrag('polygon',$event)"></i>-->
-<!--        </div>-->
-<!--      </el-tooltip>-->
-
-<!--      <div class="btn-group_tips" v-if="showTips">-->
-<!--        拖拽生成<br/>资产拓扑图形-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div class="btn-group">-->
-<!--      <el-tooltip class="item" effect="dark" content="直线箭头" placement="bottom">-->
-<!--        <div :class=" ['btn',currentArrow === 1?'currentArrow':'']" @click="changeEdgeType('normal')">-->
-<!--          <i class="iconfont icon-ai28"></i>-->
-<!--        </div>-->
-<!--      </el-tooltip>-->
-<!--      <el-tooltip content="曲线箭头" placement="bottom">-->
-<!--        <div :class=" ['btn',currentArrow === 2?'currentArrow':'']" @click="changeEdgeType('smooth')">-->
-<!--          <i class="iconfont icon-Down-Right"></i>-->
-<!--        </div>-->
-<!--      </el-tooltip>-->
-<!--      <el-tooltip content="直角箭头" placement="bottom">-->
-<!--        <div :class=" ['btn',currentArrow === 3?'currentArrow':'']" @click="changeEdgeType()">-->
-<!--          <i class="iconfont icon-jiantou"></i>-->
-<!--        </div>-->
-<!--      </el-tooltip>-->
-<!--    </div>-->
-<!--    <div class="btn-group">-->
-<!--      <el-tooltip content="删除" placement="bottom">-->
-<!--        <div class="btn" @click="deleteNode()" style="margin-top: 5px;">-->
-<!--          <i class="iconfont icon-shanchu"></i>-->
-<!--        </div>-->
-<!--      </el-tooltip>-->
-<!--      <el-tooltip content="保存PNG" placement="bottom">-->
-<!--        <div class="btn" @click="saveToPNG()" title="保存">-->
-<!--          <i class="iconfont icon-baocun"></i>-->
-<!--        </div>-->
-<!--      </el-tooltip>-->
-<!--    </div>-->
-<!--  </div>-->
-
 </div>
 </template>
 <script>
@@ -67,7 +10,7 @@ import '@antv/x6-vue-shape'
 import insertCss from 'insert-css';
 import { Graph, Shape, FunctionExt, DataUri } from '@antv/x6'
 import {startDragToGraph} from './Graph/methods.js'
-// import RightDrawer from "./components/RightDrawer.vue";
+import _ from "lodash";
 
 const data = {
   "cells": [
@@ -479,6 +422,14 @@ const data = {
 };
 export default {
   // components: {RightDrawer},
+  props: {
+    jsonData: {
+      type: Object,
+      default: () => { return {
+        cells: [],
+      }},
+    },
+  },
   data() {
     return {
       graph:'',
@@ -505,14 +456,26 @@ export default {
       }
     }
   },
+  watch: {
+    jsonData: {
+      handler:function (val)   {
+        if (val.cells && val.cells.length >  0) {
+          this.$nextTick(() => {
+            this.graph.fromJSON(_.cloneDeep(val))
+          })
+        }
+      },
+      deep: true,
+    }
+  },
   mounted () {
     this.initX6();
-    setTimeout(()=>{
-      this.showTips = true
-    },1000)
-    setTimeout(()=>{
-      this.showTips = false
-    },5000)
+    // setTimeout(()=>{
+    //   this.showTips = true
+    // },1000)
+    // setTimeout(()=>{
+    //   this.showTips = false
+    // },5000)
   },
   methods: {
     initX6(){
@@ -595,7 +558,8 @@ export default {
               }
             }
           `);
-      this.graph.fromJSON(data)
+      // this.graph.fromJSON(data)
+      this.graph.fromJSON(_.cloneDeep(this.jsonData));
       this.$nextTick(() => {
         // this.graph.centerContent()  // 内容居中
         if ( this.graph.history) {

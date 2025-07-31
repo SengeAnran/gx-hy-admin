@@ -22,7 +22,7 @@
 import assistant from './Assistant'
 import followChart from './followChart/index.vue'
 import {saveFlow, getPlanById} from "@/api/followchart";
-import {ports} from "./followChart/Graph/methods";
+import {handleCellJson, ports, showJson} from "./followChart/Graph/methods";
 
 export default {
   components: {
@@ -32,7 +32,6 @@ export default {
   },
   data() {
     return {
-      id: undefined,
       planId: undefined,
       followChart: null,
       typeName: '方案',
@@ -51,79 +50,23 @@ export default {
     init() {
       this.followChart = this.$refs.followChart;
       const {id} = this.$route.query;
-      this.id = id;
+      this.planId = id;
+      this.changeNowPlanId();
     },
 
     // 设置方案id
     changeNowPlanId() {
-      this.planId = this.id;
       getPlanById(this.planId).then(res => {
-        const {nodes, edges} = res.data;
-        const cells = this.handleCellJson(nodes, edges);
+        // const {nodes, edges} = res.data;
+        const {nodes, edges} = showJson;
+        const cells = handleCellJson(nodes, edges);
         this.flowchart = {
           cells,
         };
-        console.log(this.flowchart);
+        // console.log(this.flowchart);
       })
     },
-    /**
-     *  加个cellJson数据
-     * @param nodes
-     * @param edges
-     * @returns {*[]}
-     */
-    handleCellJson(nodes, edges ) {
-      const nodeArr = nodes.map(i => {
-        return {
-          ...i,
-          ports,
-        }
-      })
-      nodeArr.forEach(i => {
-        if (i.shape === 'polygon')  {
-          i.attrs.label.textWrap = {
-            width: -50,
-            height: '70%',
-            ellipsis: true
-          }
-          i.attrs.body.refPoints = "0,10 10,0 20,10 10,20";
-        } else if (i.shape === 'ellipse')  {
-          i.attrs.label.textWrap = {
-            width: -20,
-            height: -10,
-            ellipsis: true
-          }
-        } else {
-          i.attrs.label.textWrap = {
-            width: -10,
-            height: -10,
-            ellipsis: true
-          }
-        }
-      })
-      let edgeArr = [];
-      if (edges && edges.length > 0) {
-        edgeArr = edges.map(i => {
-          const edge = {
-            ...i,
-          }
-          edge.attrs.line = {
-            ...edge.attrs.line,
-            "targetMarker": {
-              "name": "classic",
-              "size": 8
-            },
-            "strokeDasharray": 0,
-            "style": {
-              "animation": "ant-line 30s infinite linear"
-            }
-          }
-          return edge
-        })
-      }
 
-      return [...nodeArr, ...edgeArr];
-    },
     // 保存
     clickSave() {
       const json = this.followChart.getChartJson();
@@ -163,7 +106,7 @@ export default {
     flex-direction: column;
     height: 100%;
     //flex: 2.8;
-    max-width: 1200px;
+    max-width: 70%;
     min-width: 800px;
     gap: 20px;
 

@@ -285,7 +285,9 @@ export default {
     display: flex;
     flex-direction: column;
     height: 100%;
-    flex: 2.8;
+    //flex: 2.8;
+    max-width: 70%;
+    min-width: 800px;
     //width: 1000px;
     gap: 20px;
     padding: 34px 0 0;

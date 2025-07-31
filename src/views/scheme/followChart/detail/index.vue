@@ -10,8 +10,9 @@
 </template>
 
 <script>
-import {getPlanById} from "@/api/schemeList";
+import {getPlanById} from "@/api/followchart";
 import followChart from "./followChart/index.vue";
+import {handleCellJson, ports} from "@/views/scheme/followChart/edit/followChart/Graph/methods";
 
 export default {
   name: "index",
@@ -36,6 +37,11 @@ export default {
      */
     setContent() {
       getPlanById(this.id).then(res => {
+        const {nodes, edges} = res.data;
+        const cells = handleCellJson(nodes, edges);
+        this.flowchart = {
+          cells,
+        };
         // let htmlStr =  marked(res.data.content);
         //
         // htmlStr = ((htmlStr.replace(/<\/?thead>/gi, ''))
