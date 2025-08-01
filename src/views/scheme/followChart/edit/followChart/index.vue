@@ -283,6 +283,7 @@ export default {
     saveToPNG () {
       this.$nextTick(()=>{
         this.graph.toPNG((dataUri) => {
+          // console.log(dataUri)
           // 下载
           DataUri.downloadDataUri(dataUri, '资产拓扑图.png')
         },{

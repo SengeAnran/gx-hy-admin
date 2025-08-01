@@ -490,6 +490,16 @@ export default {
           enabled: true,
           orthogonal:false,
         },
+        // scroller: {
+        //   enabled: true,
+        //   pannable: true,
+        //   pageVisible: true,
+        //   pageBreak: false,
+        // },
+        mousewheel: {
+          enabled: true,
+          // modifiers: ['ctrl', 'meta'],
+        },
         selecting: true, // 可选
         snapline:  true,
         interacting: {
