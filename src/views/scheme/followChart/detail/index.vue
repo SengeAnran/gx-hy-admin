@@ -3,7 +3,7 @@
 <div class="detail">
   <div class="detail-title">方案详情</div>
   <div class="bottom-content">
-    <followChart ref="followChart" :code="flowchart" />
+    <followChart ref="followChart" :jsonData="flowchart" />
   </div>
 
 </div>
@@ -12,14 +12,14 @@
 <script>
 import {getPlanById} from "@/api/followchart";
 import followChart from "./followChart/index.vue";
-import {handleCellJson, ports} from "@/views/scheme/followChart/edit/followChart/Graph/methods";
+import {handleCellJson} from "@/views/scheme/followChart/edit/followChart/Graph/methods";
 
 export default {
   name: "index",
   components: {followChart},
   data() {
     return {
-      flowchart: '',
+      flowchart: null,
       id: undefined,
     }
   },
@@ -42,6 +42,7 @@ export default {
         this.flowchart = {
           cells,
         };
+        // console.log(this.flowchart);
         // let htmlStr =  marked(res.data.content);
         //
         // htmlStr = ((htmlStr.replace(/<\/?thead>/gi, ''))
